@@ -22,7 +22,7 @@ public class Pregunta extends Thread {
 			socket.connect(direccion);
 			//Escribe la peticion al servidor
 			oos = new ObjectOutputStream(socket.getOutputStream());
-			oos.writeObject(new Conversacion(nick,"prueba2",null));
+			oos.writeObject(new Conversacion(nick,"pregunta",null));
 			oos.flush();
 			
 		} catch (IOException e) {

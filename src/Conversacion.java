@@ -48,8 +48,12 @@ public class Conversacion implements java.io.Serializable {
 	public void setDestinatario(String destinatario) {
 		this.destinatario = destinatario;
 	}
-	
-	
-	
 
+
+
+	@Override
+	public String toString() {
+		return "Conversacion [Nick=" + Nick + ", mensaje=" + mensaje + ", destinatario=" + destinatario + "]";
+	}
+	
 }

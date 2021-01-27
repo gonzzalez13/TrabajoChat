@@ -26,6 +26,7 @@ public class Mensaje extends Thread {
 	}
 
 	
+	@SuppressWarnings("unlikely-arg-type")
 	private void escuchar() throws ClassNotFoundException{
 		InputStream is = null;
 		ObjectInputStream ois = null;
@@ -37,17 +38,21 @@ public class Mensaje extends Thread {
 			ois = new ObjectInputStream(is);
 			Conversacion mensaje = (Conversacion) ois.readObject();
 			conversacion = new ArrayList<Conversacion>();
-			conversacion.add(mensaje);
-
-	
-				if (mensaje.getMensaje().equals("prueba2")) {
+			
+				if (mensaje.getMensaje().equals("pregunta")) {
 					for (int i = 0; i < conversacion.size(); i++) {
-						if(mensaje.getNick().equals(mensaje.getDestinatario())) {
+						if(mensaje.getNick().equals(conversacion.indexOf(mensaje.getDestinatario()))) {
+							
+							String nick= mensaje.getNick();
+							String contenido = mensaje.getMensaje();
+							
+							System.out.println(nick+":  "+contenido);
 							
 						}
 						
 					}
 				}
+				conversacion.add(mensaje);
 				
 			
 		} catch (IOException e) {
