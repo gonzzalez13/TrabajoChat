@@ -22,11 +22,8 @@ public class Cliente2 {
 			socket.connect(direccion);
 			//Escribe el Nick y la ip al servidor
 			oos = new ObjectOutputStream(socket.getOutputStream());
-			//Usuario usuario = new Usuario(Nick,InetAddress.getLocalHost());
-			//oos.writeObject(usuario);
-			oos.writeObject(new Conversacion(Nick,"Prueba", "192.168.0.61"));
+			oos.writeObject(new Conversacion(Nick,"Prueba","Gonzzalez13"));
 			oos.flush();
-			
 			Pregunta p = new Pregunta(socket,Nick);
 			p.start();
 		}

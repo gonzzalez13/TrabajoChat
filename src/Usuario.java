@@ -6,8 +6,7 @@ public class Usuario implements java.io.Serializable {
 	private InetAddress ip;
 	
 	
-	public Usuario(String nick, InetAddress ip) {
-		super();
+	public Usuario(String nick,InetAddress ip) {
 		this.nick = nick;
 		this.ip = ip;
 	}

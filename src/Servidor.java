@@ -1,5 +1,6 @@
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 
 public class Servidor {
 
@@ -9,10 +10,11 @@ public class Servidor {
 		
 		try {
 			server = new ServerSocket(53203);
+			List<Conversacion> conversacion = null;
 			while (true) {
 				try {
 					Socket conexion = server.accept();
-					Mensaje hilo = new Mensaje(conexion);
+					Mensaje hilo = new Mensaje(conexion,conversacion);
 					hilo.start();
 					
 				} catch (Exception e) {

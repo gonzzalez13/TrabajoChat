@@ -17,10 +17,12 @@ public class Mensaje extends Thread {
 	
 	Socket socket;
 	Socket socketenvio;
+	List<Conversacion> conversacion;
 
-	public Mensaje(Socket socket) {
+	public Mensaje(Socket socket,List<Conversacion> conversacion) {
 		super();
 		this.socket = socket;
+		this.conversacion = conversacion;
 	}
 
 	
@@ -28,44 +30,25 @@ public class Mensaje extends Thread {
 		InputStream is = null;
 		ObjectInputStream ois = null;
 		ObjectOutputStream oos = null;
-		List<Conversacion> conversacion = null;
-		
+
 		try {
 			System.out.println("Conexion recibida!");
 			is = socket.getInputStream();
 			ois = new ObjectInputStream(is);
 			Conversacion mensaje = (Conversacion) ois.readObject();
-			Conversacion pregunta = (Conversacion) ois.readObject();
+			conversacion = new ArrayList<Conversacion>();
+			conversacion.add(mensaje);
+
 	
-				if (pregunta.getNick().equals(mensaje.getDestinatario())) {
-					//envia el mensaje
-					oos = new ObjectOutputStream(socket.getOutputStream());
-					oos.writeObject(mensaje);
-					oos.flush();
-					
+				if (mensaje.getMensaje().equals("prueba2")) {
+					for (int i = 0; i < conversacion.size(); i++) {
+						if(mensaje.getNick().equals(mensaje.getDestinatario())) {
+							
+						}
+						
+					}
 				}
-			
-			
-			
-			
-			/*
-			usuarios = new ArrayList<Usuario>();
-			Usuario usuario = (Usuario) ois.readObject();
-			usuarios.add(usuario);
-			
-			for (Usuario usuario2 : usuarios) {
-				if (conversacion.getDestinatario().equals(usuario.getNick())) {
-					InetSocketAddress direccion = new InetSocketAddress(usuario.getIp(), 53203);
-					socket = new Socket();
-					socket.connect(direccion);
-					//envia el mensaje
-					oos = new ObjectOutputStream(socket.getOutputStream());
-					
-				}
-			}
-			*/
-			
-			
+				
 			
 		} catch (IOException e) {
 			System.out.println("Error al aceptar conexion "+e.getMessage());
