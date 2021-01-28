@@ -1,20 +1,17 @@
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.ServerSocket;
 import java.net.Socket;
-
-import com.sun.jndi.cosnaming.IiopUrl.Address;
 
 public class Cliente2 {
 	
 	public static void main(String[] args) throws Exception {
 		Socket socket = null;
+		ObjectInputStream ois = null;
 		ObjectOutputStream oos = null;
-		String Nick = "Gonzzalez13";
+		String Nick = "B";
 		
 		try {
 			InetSocketAddress direccion = new InetSocketAddress(InetAddress.getLocalHost(), 53203);
@@ -22,10 +19,14 @@ public class Cliente2 {
 			socket.connect(direccion);
 			//Escribe el Nick y la ip al servidor
 			oos = new ObjectOutputStream(socket.getOutputStream());
-			oos.writeObject(new Conversacion(Nick,"Prueba","Gonzzalez13"));
+			oos.writeObject(new Conversacion(Nick,"PruebaB","A"));
 			oos.flush();
 			Pregunta p = new Pregunta(socket,Nick);
 			p.start();
+			
+			ois = new ObjectInputStream(socket.getInputStream());
+			Conversacion mensaje = (Conversacion) ois.readObject();
+			System.out.println(mensaje.getNick()+":  "+mensaje.getMensaje());
 		}
 		catch(IOException e) {
 			e.printStackTrace();

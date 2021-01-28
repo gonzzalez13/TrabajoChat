@@ -1,8 +1,10 @@
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Servidor {
+
 
 	public static void main(String[] args) throws Exception {
 		
@@ -10,7 +12,7 @@ public class Servidor {
 		
 		try {
 			server = new ServerSocket(53203);
-			List<Conversacion> conversacion = null;
+			List<Conversacion> conversacion =  new ArrayList<Conversacion>();;
 			while (true) {
 				try {
 					Socket conexion = server.accept();

@@ -12,8 +12,11 @@ public class Conversacion implements java.io.Serializable {
 		this.destinatario = destinatario;
 	}
 
+	public Conversacion(String nick,String mensaje) {
+		Nick = nick;
+		this.mensaje = mensaje;
+	}
 	
-
 	public Conversacion(String nick) {
 		Nick = nick;
 	}

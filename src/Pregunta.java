@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -13,8 +14,9 @@ public class Pregunta extends Thread {
 		this.nick = nick;
 	}
 	
-	public void respuestas() throws IOException {
+	public void respuestas() throws IOException, ClassNotFoundException {
 		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
 		try {
 			System.out.println("Esta mi mensaje");
 			InetSocketAddress direccion = new InetSocketAddress("localhost",53203);
@@ -25,11 +27,16 @@ public class Pregunta extends Thread {
 			oos.writeObject(new Conversacion(nick,"pregunta",null));
 			oos.flush();
 			
-		} catch (IOException e) {
+			ois = new ObjectInputStream(socket.getInputStream());
+			Conversacion mensaje = (Conversacion) ois.readObject();
+			System.out.println(mensaje.getNick()+":  "+mensaje.getMensaje());
+			
+		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 			throw e;
 		}finally {
 			oos.close();
+			ois.close();
 		}
 		
 	}

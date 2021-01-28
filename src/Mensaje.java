@@ -1,14 +1,12 @@
 import java.io.IOException;
+
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Reader;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
+
+import sun.invoke.empty.Empty;
 
 
 
@@ -16,7 +14,7 @@ public class Mensaje extends Thread {
 	
 	
 	Socket socket;
-	Socket socketenvio;
+	
 	List<Conversacion> conversacion;
 
 	public Mensaje(Socket socket,List<Conversacion> conversacion) {
@@ -26,34 +24,29 @@ public class Mensaje extends Thread {
 	}
 
 	
-	@SuppressWarnings("unlikely-arg-type")
+
 	private void escuchar() throws ClassNotFoundException{
-		InputStream is = null;
+		
 		ObjectInputStream ois = null;
 		ObjectOutputStream oos = null;
 
 		try {
 			System.out.println("Conexion recibida!");
-			is = socket.getInputStream();
-			ois = new ObjectInputStream(is);
+			ois = new ObjectInputStream(socket.getInputStream());
 			Conversacion mensaje = (Conversacion) ois.readObject();
-			conversacion = new ArrayList<Conversacion>();
-			
+			if(!conversacion.isEmpty()) {
 				if (mensaje.getMensaje().equals("pregunta")) {
 					for (int i = 0; i < conversacion.size(); i++) {
-						if(mensaje.getNick().equals(conversacion.indexOf(mensaje.getDestinatario()))) {
-							
-							String nick= mensaje.getNick();
-							String contenido = mensaje.getMensaje();
-							
-							System.out.println(nick+":  "+contenido);
-							
+						if(mensaje.getNick().equals(conversacion.get(i).getDestinatario())) {
+							mensaje = conversacion.get(i);
 						}
-						
 					}
 				}
+			}else {
 				conversacion.add(mensaje);
-				
+			}
+			oos = new ObjectOutputStream(socket.getOutputStream());
+			oos.writeObject(mensaje);
 			
 		} catch (IOException e) {
 			System.out.println("Error al aceptar conexion "+e.getMessage());
@@ -61,7 +54,6 @@ public class Mensaje extends Thread {
 		} finally {
 			try {
 				ois.close();
-				is.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -70,9 +62,7 @@ public class Mensaje extends Thread {
 				if (null != socket) {
 					socket.close();
 				}
-				if (null != socketenvio) {
-					socketenvio.close();
-				}
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
