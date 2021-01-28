@@ -5,6 +5,8 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import Modelo.Conversacion;
+
 public class Cliente2 {
 	
 	public static void main(String[] args) throws Exception {

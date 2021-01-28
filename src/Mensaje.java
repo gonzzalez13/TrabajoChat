@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
 
+import Modelo.Conversacion;
 import sun.invoke.empty.Empty;
 
 

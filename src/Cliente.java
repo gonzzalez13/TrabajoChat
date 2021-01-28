@@ -6,6 +6,8 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
+import Modelo.Conversacion;
+
 
 public class Cliente {
 	

@@ -5,6 +5,8 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import Modelo.Conversacion;
+
 public class Pregunta extends Thread {
 	Socket socket;
 	String nick;

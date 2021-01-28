@@ -1,3 +1,4 @@
+package Modelo;
 
 public class Conversacion implements java.io.Serializable {
 	
