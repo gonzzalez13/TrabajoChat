@@ -1,0 +1,24 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#ventana{
+	
+	-fx-background-color: linear-gradient(#96A6E5,#f9f9f9);
+}
+
+#btnEnviar{
+	-fx-background-color: #96A6E5;
+	-fx-background-radius: 30;
+	-fx-border-color: #F9F9F9F9;
+	-fx-border-radius: 50;
+	-fx-border-width: 3;
+	-fx-font-family: Arial Rounded MT Bold;
+	-fx-font-size: 15px;
+}
+
+#conectar{
+	-fx-background-color: #96A6E5;
+}
+
+#btnTexto{
+	-fx-background-color: #96A6E5;
+	-fx-border-width: 3;
+}
