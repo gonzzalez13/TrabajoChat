@@ -19,7 +19,7 @@ public class ChatTefaController {
 	
 	
 	@FXML
-	private TextField txtEnviar;
+	private TextField txtEnviarM;
 	
 	@FXML
 	private TextArea txtAreaChat;
@@ -34,27 +34,27 @@ public class ChatTefaController {
 		Socket socket = null;
 		ObjectInputStream ois = null;
 		ObjectOutputStream oos = null;
-		String Nick = "B";
+		String usuario,mensaje,destinatario;
 		
 		try {
 			InetSocketAddress direccion = new InetSocketAddress(InetAddress.getLocalHost(), 53203);
 			socket = new Socket();
 			socket.connect(direccion);
 			
-			//Escribe el Nick y la ip al servidor
-			
-			
-			
+			//Escribe 
+			usuario = "Gonzzalez13";
+			mensaje = this.txtEnviarM.getText();
+			destinatario = "B";
 			
 			oos = new ObjectOutputStream(socket.getOutputStream());
-			oos.writeObject(new Conversacion(Nick,"PruebaB","A"));
+			oos.writeObject(new Conversacion(usuario,mensaje,destinatario));
 			oos.flush();
-			Pregunta p = new Pregunta(socket,Nick);
+			Pregunta p = new Pregunta(socket,usuario);
 			p.start();
 			
 			ois = new ObjectInputStream(socket.getInputStream());
-			Conversacion mensaje = (Conversacion) ois.readObject();
-			System.out.println(mensaje.getNick()+":  "+mensaje.getMensaje());
+			Conversacion recivido = (Conversacion) ois.readObject();
+			
 		}
 		catch(IOException | ClassNotFoundException e) {
 			e.printStackTrace();

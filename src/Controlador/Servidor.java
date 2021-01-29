@@ -1,3 +1,4 @@
+package Controlador;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -17,8 +18,7 @@ public class Servidor {
 			List<Conversacion> conversacion =  new ArrayList<Conversacion>();;
 			while (true) {
 				try {
-					Socket conexion = server.accept();
-					Mensaje hilo = new Mensaje(conexion,conversacion);
+					Mensaje hilo = new Mensaje(server.accept(),conversacion);
 					hilo.start();
 					
 				} catch (Exception e) {
