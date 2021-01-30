@@ -20,4 +20,5 @@
 
 #btnTexto{
 	-fx-background-color: #96A6E5;
+	-fx-border-width: 3;
 }

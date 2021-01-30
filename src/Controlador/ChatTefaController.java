@@ -26,10 +26,13 @@ public class ChatTefaController {
 	
 	
 	
-	
+	@FXML
+	public void IniciarSesion(ActionEvent event) {
+		
+	}
 	
 	@FXML
-	public void Onenviar(ActionEvent event) throws ClassNotFoundException, IOException {
+	public void OnEnviar(ActionEvent event) throws ClassNotFoundException, IOException {
 		
 		Socket socket = null;
 		ObjectInputStream ois = null;
