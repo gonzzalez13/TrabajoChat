@@ -43,7 +43,7 @@ public class ChatTefaController {
 			
 			//Escribe 
 			usuario = "Gonzzalez13";
-			mensaje = this.txtEnviarM.getText();
+			mensaje = "prueba";
 			destinatario = "B";
 			
 			oos = new ObjectOutputStream(socket.getOutputStream());
