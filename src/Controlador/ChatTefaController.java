@@ -1,7 +1,6 @@
 package Controlador;
 
-import java.awt.Button;
-import java.awt.TextField;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -13,13 +12,14 @@ import Modelo.Conversacion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 
 public class ChatTefaController {
 	
 	
 	@FXML
-	private TextField txtEnviarM;
+	private TextField txtEnviar;
 	
 	@FXML
 	private TextArea txtAreaChat;
@@ -43,17 +43,22 @@ public class ChatTefaController {
 			
 			//Escribe 
 			usuario = "Gonzzalez13";
-			mensaje = "prueba";
+			mensaje = this.txtEnviar.getText();
 			destinatario = "B";
 			
 			oos = new ObjectOutputStream(socket.getOutputStream());
 			oos.writeObject(new Conversacion(usuario,mensaje,destinatario));
 			oos.flush();
+			
 			Pregunta p = new Pregunta(socket,usuario);
 			p.start();
 			
 			ois = new ObjectInputStream(socket.getInputStream());
-			Conversacion recivido = (Conversacion) ois.readObject();
+			Conversacion recibido = (Conversacion) ois.readObject();
+			
+			
+			this.txtAreaChat.setText(recibido.getNick()+": "+recibido.getMensaje()+"/n");
+			
 			
 		}
 		catch(IOException | ClassNotFoundException e) {

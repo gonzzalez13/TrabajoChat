@@ -32,7 +32,7 @@ public class Pregunta extends Thread {
 			
 			ois = new ObjectInputStream(socket.getInputStream());
 			Conversacion mensaje = (Conversacion) ois.readObject();
-			System.out.println(mensaje.getNick()+":  "+mensaje.getMensaje());
+			
 			
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
