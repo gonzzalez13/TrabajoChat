@@ -9,10 +9,16 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 import Modelo.Conversacion;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
 
 public class ChatTefaController {
@@ -24,10 +30,33 @@ public class ChatTefaController {
 	@FXML
 	private TextArea txtAreaChat;
 	
+	@FXML
+	private TextArea conectar;
+	
+	@FXML
+	private Pane ventana;
+	
+	@FXML
+	private TextField txtNombre;
+	
+	
+	@FXML
+	private ListView<String> usuarios;
+	
 	
 	
 	@FXML
 	public void IniciarSesion(ActionEvent event) {
+		if(!txtNombre.getText().equals("")) {
+			conectar.setText(txtNombre.getText()+" ha iniciado sesión");
+			usuarios.getItems().add(txtNombre.getText());
+			
+		
+		}
+		else {
+			
+		}
+		ventana.setVisible(false);
 		
 	}
 	

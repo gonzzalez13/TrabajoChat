@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ventana" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="678.0" style="-fx-background-color: #96A6E5;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.ChatTefaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="678.0" style="-fx-background-color: #96A6E5;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.ChatTefaController">
    <children>
-      <TextArea fx:id="conectar" editable="false" layoutX="39.0" layoutY="81.0" prefHeight="260.0" prefWidth="134.0" style="-fx-border-color: white; -fx-border-width: 3; -fx-background-color: #96A6E5;" />
+      <TextArea fx:id="conectar" editable="false" layoutX="22.0" layoutY="81.0" prefHeight="260.0" prefWidth="166.0" style="-fx-border-color: white; -fx-border-width: 3; -fx-background-color: #96A6E5;" />
       <TextArea fx:id="txtAreaChat" editable="false" layoutX="226.0" layoutY="81.0" prefHeight="260.0" prefWidth="200.0" style="-fx-background-color: #96A6E5; -fx-border-width: 3; -fx-border-color: #f9f9f9f9;" />
       <TextField fx:id="txtEnviar" layoutX="226.0" layoutY="342.0" prefHeight="31.0" prefWidth="200.0" style="-fx-background-color: #96A6E5; -fx-border-width: 3; -fx-border-color: #F9F9F9F9;" />
       <Button fx:id="btnTexto" layoutX="426.0" layoutY="342.0" mnemonicParsing="false" onAction="#OnEnviar" prefHeight="31.0" prefWidth="52.0" style="-fx-border-color: #F9F9F9;" />
@@ -31,9 +31,7 @@
             <Image url="@../../img/enviar.png" />
          </image>
       </ImageView>
-      <ListView layoutX="452.0" layoutY="81.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button fx:id="usuarioDos" layoutX="517.0" layoutY="93.0" mnemonicParsing="false" text="Spetsnaz20" />
-      <Button fx:id="usuarioUno" layoutX="514.0" layoutY="130.0" mnemonicParsing="false" text="Gonzzalez13" />
+      <ListView fx:id="usuarios" layoutX="452.0" layoutY="81.0" prefHeight="200.0" prefWidth="200.0" />
       <AnchorPane fx:id="ventana" layoutX="-2.0" prefHeight="441.0" prefWidth="678.0" stylesheets="@application.css">
          <children>
             <Label layoutX="291.0" layoutY="74.0" text="TEFA" textFill="#f9f9f9">
