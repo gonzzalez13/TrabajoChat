@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.List;
 
 import Modelo.Conversacion;
 import javafx.collections.FXCollections;
@@ -43,7 +44,7 @@ public class ChatTefaController {
 	@FXML
 	private ListView<String> usuarios;
 	
-	
+	String destinatario;
 	
 	@FXML
 	public void IniciarSesion(ActionEvent event) {
@@ -66,7 +67,7 @@ public class ChatTefaController {
 		Socket socket = null;
 		ObjectInputStream ois = null;
 		ObjectOutputStream oos = null;
-		String usuario,mensaje,destinatario;
+		String usuario,mensaje;
 		
 		try {
 			InetSocketAddress direccion = new InetSocketAddress(InetAddress.getLocalHost(), 53203);
@@ -74,22 +75,24 @@ public class ChatTefaController {
 			socket.connect(direccion);
 			
 			//Escribe 
-			usuario = "Gonzzalez13";
+			usuario = this.txtNombre.getText();
 			mensaje = this.txtEnviar.getText();
-			destinatario = "B";
 			
 			oos = new ObjectOutputStream(socket.getOutputStream());
-			oos.writeObject(new Conversacion(usuario,mensaje,destinatario));
+			oos.writeObject(new Conversacion(usuario,mensaje,this.destinatario));
 			oos.flush();
 			
-			Pregunta p = new Pregunta(socket,usuario);
-			p.start();
+//			Pregunta p = new Pregunta(socket,usuario);
+//			p.start();
 			
 			ois = new ObjectInputStream(socket.getInputStream());
-			Conversacion recibido = (Conversacion) ois.readObject();
+			List<Conversacion> recibido = (List<Conversacion>) ois.readObject();
+			String respuesta = this.txtAreaChat.getText();
+			for(Conversacion conv: recibido) {
+				respuesta = conv.getNick()+": "+conv.getMensaje() + "\n";
+			}			
 			
-			
-			this.txtAreaChat.setText(recibido.getNick()+": "+recibido.getMensaje()+"/n");
+			this.txtAreaChat.setText(respuesta);
 			
 			
 		}

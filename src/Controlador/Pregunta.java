@@ -11,6 +11,7 @@ import Modelo.Conversacion;
 public class Pregunta extends Thread {
 	Socket socket;
 	String nick;
+	boolean peticion = true;
 
 	public Pregunta(Socket socket,String nick) {
 		this.socket = socket;
@@ -21,7 +22,6 @@ public class Pregunta extends Thread {
 		ObjectOutputStream oos = null;
 		ObjectInputStream ois = null;
 		try {
-			System.out.println("Esta mi mensaje");
 			InetSocketAddress direccion = new InetSocketAddress("localhost",53203);
 			socket = new Socket();
 			socket.connect(direccion);
@@ -32,6 +32,10 @@ public class Pregunta extends Thread {
 			
 			ois = new ObjectInputStream(socket.getInputStream());
 			Conversacion mensaje = (Conversacion) ois.readObject();
+			if(nick.equals(mensaje.getDestinatario())) {
+				peticion = false;
+				System.out.println(mensaje.getNick()+":  "+mensaje.getMensaje());
+			}
 			
 			
 		} catch (IOException | ClassNotFoundException e) {
@@ -46,7 +50,7 @@ public class Pregunta extends Thread {
 	
 	@Override
 	public void run() {
-		while (true) {
+		while (peticion == true) {
 			try {
 				this.sleep(5000);
 				respuestas();

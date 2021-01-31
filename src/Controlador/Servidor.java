@@ -3,6 +3,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import Modelo.Conversacion;
 
@@ -15,7 +16,7 @@ public class Servidor {
 		
 		try {
 			server = new ServerSocket(53203);
-			List<Conversacion> conversacion =  new ArrayList<Conversacion>();;
+			Vector<Conversacion> conversacion =  new Vector<Conversacion>();;
 			while (true) {
 				try {
 					Mensaje hilo = new Mensaje(server.accept(),conversacion);

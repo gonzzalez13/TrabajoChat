@@ -5,7 +5,7 @@ public class Conversacion implements java.io.Serializable {
 	private String Nick;
 	private String mensaje;
 	private String destinatario;
-	
+	private String tipoMensaje;
 	
 	public Conversacion(String nick, String mensaje,String destinatario) {
 		Nick = nick;
